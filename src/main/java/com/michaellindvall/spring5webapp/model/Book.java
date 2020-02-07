@@ -7,10 +7,7 @@
  */
 package com.michaellindvall.spring5webapp.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -22,24 +19,22 @@ import java.util.Set;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@RequiredArgsConstructor
 @Entity
 @EqualsAndHashCode(exclude = {"title", "isbn", "publisher", "authors"})
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @NonNull
     private String title;
+    @NonNull
     private String isbn;
+    @NonNull
     private String publisher;
 
     @ManyToMany
     @JoinTable(name = "author_book", joinColumns = @JoinColumn(name = "book_id"),
             inverseJoinColumns = @JoinColumn(name = "author_id"))
     private Set<Author> authors = new HashSet<>();
-
-    public Book(String t, String i, String p) {
-        this.title = t;
-        this.isbn = i;
-        this.publisher = p;
-    }
 }

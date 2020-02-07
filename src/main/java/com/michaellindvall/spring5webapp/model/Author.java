@@ -7,12 +7,10 @@
  */
 package com.michaellindvall.spring5webapp.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -20,15 +18,18 @@ import java.util.Set;
  * @author mlindvall
  */
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@RequiredArgsConstructor
+@AllArgsConstructor
 @Entity
 @EqualsAndHashCode(exclude = {"firstName", "lastName", "books"})
 public class Author {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @NonNull
     private String firstName;
+    @NonNull
     private String lastName;
 
     @ManyToMany(mappedBy = "authors")

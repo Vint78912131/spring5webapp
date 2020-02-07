@@ -9,6 +9,7 @@ package com.michaellindvall.spring5webapp.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -22,6 +23,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@EqualsAndHashCode(exclude = {"title", "isbn", "publisher", "authors"})
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

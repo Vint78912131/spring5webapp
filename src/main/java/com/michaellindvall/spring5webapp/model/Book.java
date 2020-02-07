@@ -21,20 +21,27 @@ import java.util.Set;
 @NoArgsConstructor
 @RequiredArgsConstructor
 @Entity
-@EqualsAndHashCode(exclude = {"title", "isbn", "publisher", "authors"})
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
     @NonNull
+    @EqualsAndHashCode.Exclude
     private String title;
+
     @NonNull
+    @EqualsAndHashCode.Exclude
     private String isbn;
-    @NonNull
-    private String publisher;
 
     @ManyToMany
     @JoinTable(name = "author_book", joinColumns = @JoinColumn(name = "book_id"),
             inverseJoinColumns = @JoinColumn(name = "author_id"))
+    @EqualsAndHashCode.Exclude
     private Set<Author> authors = new HashSet<>();
+
+    @OneToOne
+    @NonNull
+    @EqualsAndHashCode.Exclude
+    private Publisher publisher;
 }
